@@ -1,0 +1,70 @@
+<% layout("/layouts/boilerplate") %> <!--This we've written here to get the layout of the boiler plate to our current page (Add.ejs)-->
+<body>
+
+    
+    <div class="row">
+        <!-- Column 1 -->
+        <div class="col-8 offset-2">
+            <br>
+            <h3>Creating new Listing</h3>
+    
+            <form method="post" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+
+                <div class="mb-3">
+                    <label for="title" class="form-lable" >Title : </label>
+                    <input name="listings[title]" class="form-control" type="text" id="title" placeholder="title" required> 
+                    <div class="invalid-feedback">
+                        Please give a title.
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="description" class="form-lable">Description : </label>
+                    <textarea name="listings[description]" class="form-control" id="description" placeholder="description"  required></textarea>
+                    <div class="invalid-feedback">
+                        Please give a description.
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="image" class="form-lable">Upload image : </label>
+                    <input name="listings[image]" class="form-control" id="image" type="file" placeholder="image link" required>
+                </div>
+                
+                <div class="row"> <!--Row-->
+                    <div class="col-md-4"> <!-- Col1 -->
+                        <div class="mb-3">
+                            <label for="price" class="form-lable">Price : </label>
+                            <input name="listings[price]" class="form-control" id="price" type="text" placeholder="price (₹)" required> 
+                            <div class="invalid-feedback">
+                                Please specify the price.
+                            </div>                            
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-8">  <!-- Col2 -->
+                        <div class="mb-3">
+                            <label for="country" class="form-lable">Country : </label>
+                            <input name="listings[country]" class="form-control" id="country" type="text" placeholder="country" required> 
+                            <div class="invalid-feedback">
+                                Please enter the country.
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                
+                <div class="mb-3">
+                    <label for="location" class="form-lable">Location : </label>
+                    <input name="listings[location]" class="form-control" id="location" type="text" placeholder="location" required>  
+                    <div class="invalid-feedback">
+                        Please enter the location.
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn add-btn editBtn">Add</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+<!-- class="form-lable" -->

@@ -1,0 +1,59 @@
+<% layout("layouts/boilerplate") %> 
+<body>
+    <div class="row">
+
+        <div class="col-8 offset-2">
+
+            <form method="post" action="/listings/<%= place._id %>?_method=PATCH" novalidate class="needs-validation" enctype="multipart/form-data">
+                
+                <br>
+                
+                <div class="mb-3">
+                    <img src="<%= ogURl %>" alt="" srcset="">
+                </div>
+
+                <h2>Edit The Details : </h2>
+
+                <div class="mb-3">
+                    <b><label class="form-lable" for="title">Title : </label></b>
+                    <input class="form-control" name="listings[title]" id="title" value="<%= place.title %>" required>
+                </div>
+
+                <div class="mb-3">
+                    <b><label class="form-lable" for="description">Description : </label></b>
+                    <textarea class="form-control" rows="2" cols="100"  type="text" name="listings[description]" id="description"  required><%= place.description %></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <b><label class="form-lable" for="image">Upload new Image : </label></b>
+                    <input class="form-control" type="file" name="listings[image]" id="image" value="<%= place.image.url %>" >
+                </div>
+
+                <div class="row">
+                    
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <b><label class="form-lable" for="price">Price : </label></b>
+                            <input class="form-control" type="number" name="listings[price]" id="price" value="<%= place.price %>" required> <!-- It will convert the price into indian style ie., 1600 will be returned as 16,000 -->
+                        </div>
+                    </div>
+                
+                    <div class="col-md-8">
+                        <div class="mb-3">
+                            <b><label class="form-lable" for="country">Country : </label></b>
+                            <input class="form-control" type="text" name="listings[country]" id="country" value="<%= place.country %>" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <b><label class="form-lable" for="location">Location : </label></b>
+                    <input class="form-control" type="text" name="listings[location]" id="location" value="<%= place.location %>" required>
+                </div>
+
+                <button class="btn add-btn mt-3" type="submit">update</button> <!--class add-btn we've givne to add button of Add.ejs as well and have given it a style in styling.css that's why we've give thi here as well!-->
+            </form>
+        </div>
+    </div>
+    <!-- <script src="Edit.js"></script> -->
+</body>

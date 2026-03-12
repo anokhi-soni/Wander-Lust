@@ -1,0 +1,13 @@
+<% if(success && success.length) {%> <!--Agar success varibale exists karega aur uski length non-zero hogi tabhi ye block of code execute hoga, cuz flash/res.locals variables/keys (success) are arrays and they store flash msgs in that array-->
+    <div class="alert alert-success col-6 offset-3 alert-dismissible fade show" role="alert">
+        <%= success %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
+
+<% if(error && error.length) {%> <!--Agar error varibale exists karega aur uski length non-zero hogi tabhi ye block of code execute hoga, cuz flash/res.locals variables/keys (error) are arrays and they store flash msgs in that array-->
+    <div class="alert alert-danger col-6 offset-3 alert-dismissible fade show" role="alert">
+        <%= error %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>

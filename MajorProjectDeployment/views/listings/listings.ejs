@@ -1,0 +1,131 @@
+<% layout("/layouts/boilerplate") %>   <!--This we've written here to get the layout of the boiler plate to our current page (listings.ejs)-->
+
+<body>
+    <div class="filtersAndSwitch">
+        <div id="filters">
+            <div class="filter">
+                <div><i class="fa-solid fa-fire"></i></div>
+                <div><p>Trending</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-bed"></i></div>
+                <div><p>Rooms</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-mountain-city"></i></div>
+                <div><p>Iconi Cities</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-mountain"></i></div>
+                <div><p>Mountains</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-brands fa-fort-awesome"></i></div>
+                <div><p>Castels</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-person-swimming"></i></div>
+                <div><p>Amazing Pools</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-campground"></i></div>
+                <div><p>Camping</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-cow"></i></div>
+                <div><p>Farms</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-regular fa-snowflake"></i></div>
+                <div><p>Arctic</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-fire"></i></div>
+                <div><p>Trending</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-bed"></i></div>
+                <div><p>Rooms</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-mountain-city"></i></div>
+                <div><p>Iconi Cities</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-mountain"></i></div>
+                <div><p>Mountains</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-bed"></i></div>
+                <div><p>Rooms</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-mountain-city"></i></div>
+                <div><p>Iconi Cities</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-mountain"></i></div>
+                <div><p>Mountains</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-mountain-city"></i></div>
+                <div><p>Iconi Cities</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-mountain"></i></div>
+                <div><p>Mountains</p></div>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-bed"></i></div>
+                <div><p>Rooms</p></div>
+            </div>
+        </div>
+
+        <!-- Price Range -->
+        <div class="dropdown-center">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Price
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Action two</a></li>
+                <li><a class="dropdown-item" href="#">Action three</a></li>
+            </ul>
+        </div>
+
+        <!-- Switch -->
+        <div id="taxFilter">
+            <div class="form-check form-switch form-check-reverse">
+                <input class="form-check-input" type="checkbox" id="switchCheckReverse">
+                <label class="form-check-label" for="switchCheckReverse">Include Tax</label>
+            </div>
+            <!-- switchCheckDefault -->
+        </div>
+        
+    </div>
+    
+    
+    <!-- <a href="http://localhost:3000/listings/add"><button>+Add</button></a> --> <!--Now We won't be usig this button anymore as the navbar has the button for this-->
+    <!-- <ul> -->
+    <div class="CardContainer">    
+        <% for (const place of listings) { %>
+            <a class="cardLink" href="http://localhost:3000/listings/<%= place.id %>">
+                <div class="Cards">
+                    <div class="imageAndtext">
+                        <img src="<%= place.image.url %>" alt="">
+                        <div class="image-text">See Details</div>
+                    </div>
+                    <div class="about">
+                        <p class="title"><b><%= place.title %></b></p>
+                        <p class="price">₹<%= place.price ? place.price.toLocaleString("en-IN") : "N/A"  %> per night</p>
+                        <p class="priceAfterGST">₹<%= place.price ? (place.price + (18*place.price)/100).toLocaleString("en-IN") : "N/A"  %> per night</p> <!--Adding 18% gst to the og amount-->
+                    </div>
+                </div>
+            </a>
+            <!-- <li><a href="http://localhost:3000/listings/<%= place.id %>"><%= place.title %></a></li> -->
+        <% } %>
+    </div>
+    <!-- </ul> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="/JS/listings.js"></script> <!--contains the code for the replacement of og money by taxed money-->
+</body>

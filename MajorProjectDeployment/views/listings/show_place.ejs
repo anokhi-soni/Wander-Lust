@@ -1,0 +1,121 @@
+<%- layout("/layouts/boilerplate") %> <!--Exporting this ejs file's body tag to the 'boilerplate' named file present in a folder named 'layouts'-->
+<script>
+    const mapToken = "<%= process.env.MAP_TOKEN %>" // always write an ejs tag in quoutes inside script tag if it the variable contains a string value
+    const placeLocation = "<%- place.location %> "
+    const coordinates = <%- JSON.stringify(place.geometry.coordinates) %> // if we wanna use the variables passed by res.render, and it's not going to be a string, then we've use to JSON.stringify()
+    
+</script>
+<body>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="card showCard mt-3 mainCard">
+                <img src=<%= place.image.url %> class="card-img showImage" alt="...">
+                <div class="card-body">
+                    <!-- <h2>Listing Details : </h2> -->
+                    <p><b><%= place.title %></b></p>
+                    <p><b>@<%= place.owner.username %></b></p>
+                    <p><%= place.description %></p>
+                    <!-- <p>image : &nbsp; <%= place.image %></p> -->
+                    <p>₹<%= place.price ? place.price.toLocaleString("en-IN")  : "0"%> per night</p> <!--It will convert the price into indian style if the price is not null/empty ie., 1600 will be returned as 16,000  else it'll print "0"-->
+                    <p><%= place.location %></p>
+                    <p><%= place.country %></p>
+                    <!-- userLoginInfo -->
+                    <% if(userLoginInfo && place.owner._id.equals(userLoginInfo._id)) {%>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <a href="http://localhost:3000/listings/edit/<%= place._id %>"><button class="btn add-btn editBtn">Edit</button></a>
+                                
+                            </div>
+
+                            <div class="col-sm-3">
+                                <form method="post" action="/listings/<%= place._id %>?_method=DELETE">
+                                    <button class="deleteButton btn" id="delete" type="submit">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    <% } %>
+                    <hr>
+                    <!-- Add a review -->
+                    <% if(userLoginInfo) { %> <!--Yaani agar user loggedin hoga, tabhi wo reviews ko add kar paayega anyatha usko add revie ka option dikhaib nahi dega-->
+                        <div class="mb-3 mt-3">
+                            <form action="/listings/<%= place._id %>/reviews" method="post" novalidate class="needs-validation">
+                                <p>Leave A Review</p>
+                                <!-- <br> -->
+                                <!-- <label for="ratings" class="form-lable">Ratings </label>
+                                <br>
+                                <input type="range" min="1" max="5" class="form-range" name="reviews[ratings]" id="ratings"> -->
+
+                                <!-- Lunar starability code  -->
+                                <fieldset class="starability-slot">
+                                <p>Ratings </p>
+                                <input type="radio" id="no-rate" class="input-no-rate" name="reviews[ratings]" value="1" checked aria-label="No rating." /> <!--Set the value to 1 so that if a user didn't enter any value so by default it will be set to 1 star-->
+                                <input type="radio" id="first-rate1" name="reviews[ratings]" value="1" />
+                                <label for="first-rate1" title="Terrible">1 star</label>
+                                <input type="radio" id="first-rate2" name="reviews[ratings]" value="2" />
+                                <label for="first-rate2" title="Not good">2 stars</label>
+                                <input type="radio" id="first-rate3" name="reviews[ratings]" value="3" />
+                                <label for="first-rate3" title="Average">3 stars</label>
+                                <input type="radio" id="first-rate4" name="reviews[ratings]" value="4" />
+                                <label for="first-rate4" title="Very good">4 stars</label>
+                                <input type="radio" id="first-rate5" name="reviews[ratings]" value="5" />
+                                <label for="first-rate5" title="Amazing">5 stars</label>
+                                </fieldset>
+
+
+                                <br>
+                                <label for="comment" class="form-lable mb-1">Add a comment</label>
+                                <br>
+                                <Textarea required class="form-control" cols="80" rows="5"  name="reviews[comment]" id="comment"></Textarea>
+                                <div class="invalid-feedback">Please leave a comment...</div>
+                                <br>
+                                <button class="btn btn-outline-dark" type="submit">Submit</button>
+                            </form>
+                        </div>
+                    <% } %>
+
+                    <!-- All Reviews -->
+                    <div>
+                        <p>REVIEWS</p>
+                        <div class="row"> 
+                            <% if (!place.reviews.length) { %>
+                                <p>No reviews ....</p>
+                            <% } %>
+                            <% for (const review of place.reviews) { %>
+                                <div class="card col-5 ms-3 mb-3 reviewCard">
+                                    <p>
+                                        <b><%= review.author.username %></b> &nbsp; &nbsp; &nbsp;
+                                        <!-- To add that star rating of Lunar starability -->
+                                        <p class="starability-result card-text" data-rating="<%=  review.ratings%>">
+                                            Rated: 3 stars
+                                        </p>
+                                        <!-- <br> -->
+                                    </p>
+                                    
+                                    <p class="card-text">
+                                        <%= review.comment %> <br> <br>
+                                        <%= review.createdAt.toString().split(" ").slice(0, 4).join("-") %>
+                                    </p>
+                                    <br>
+                                    <% if (userLoginInfo && review.author._id.equals(userLoginInfo._id)) { %>
+                                        <form action="/listings/<%= place._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
+                                            <button type="submit">delete</button>
+                                        </form>
+                                    <% } %>
+                                </div>            
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- This div container will containe the map -->
+        <div class="col-6 offset-2" id="map"></div>
+    </div>
+    <br><br><br>
+    
+    <!-- JS for map -->
+    <script src="/JS/MapBoxScript.js"></script>
+    <script src="/JS/Delete.js"></script> 
+    <!-- agar hum upar src="/JS/Delete.js" ke jagah src="Delete.js"  likhte, to jo browser hai, wo isko /listings/:id ke jaise treat karta, ie., browser isko /listings/Delete.js ke jaise interpret karta jiske kaarn hume error aata -->
+</body>

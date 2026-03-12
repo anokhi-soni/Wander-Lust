@@ -37,7 +37,7 @@ let MongoStore = require("connect-mongo").default; // why to wrire default => Ne
 const store = MongoStore.create({ // creating a session storage from MongoStore and storing inside store variable
     mongoUrl : Atlas_DB_URL, // the cloud db connectivity url 
     crypto : { // we can write this secret outside the crypto as well but it's adviced to write inside it for safety purpose
-        secret : "secretCodeForMajorProject" // recommended that the password must be same as that of the secret code inside the sessionOptions
+        secret : process.env.SESSION_SECRET // recommended that the password must be same as that of the secret code inside the sessionOptions
     },
     touchAfter : 24*3600 //Interval (in seconds) between session updates. // means => Only update the session in the database once every 24 hours if the session was not modified.
 });
@@ -48,7 +48,7 @@ store.on("error", ()=>{ // creating a function 'on' inside store, so if an error
 })
 let sessionOptions = {
     store,
-    secret : "secretCodeForMajorProject",
+    secret : process.env.SESSION_SECRET, // stored the secret inside the env file so that no one else can see it
     resave : false,
     saveUninitialized : true,
     cookie : {

@@ -42,7 +42,7 @@ const store = MongoStore.create({ // creating a session storage from MongoStore 
     touchAfter : 24*3600 //Interval (in seconds) between session updates. // means => Only update the session in the database once every 24 hours if the session was not modified.
 });
 
-store.on("error", ()=>{ // creating a function 'on' inside store, so if an error arises in MongoStore, to print that error
+store.on("error", (err)=>{ // creating a function 'on' inside store, so if an error arises in MongoStore, to print that error
     console.log("ERROR IN MONGO SESSION STORE : ", err)
     
 })
@@ -174,7 +174,7 @@ app.get("/search", async (req, res, next)=>{
     // res.send("Yo!")
 })
 // agar upar se koi route match nahi hua, to ye waala middleware custom error throw kar dega ki Page was not found
-app.use((err, req, res, next)=>{ // this middleware MUST be an error middleware cuz if any route will get matched, it'll get executed if it's not an error middleware
+app.use((req, res, next)=>{ // this middleware MUST be an error middleware cuz if any route will get matched, it'll get executed if it's not an error middleware
     // next(new MyError(404, "Page Not Found"));
     throw new MyError(404, "Page Not Found");
 })

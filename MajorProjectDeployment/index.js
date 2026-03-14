@@ -174,10 +174,10 @@ app.get("/search", async (req, res, next)=>{
     // res.send("Yo!")
 })
 // agar upar se koi route match nahi hua, to ye waala middleware custom error throw kar dega ki Page was not found
-// app.use((err, req, res, next)=>{ // this middleware MUST be an error middleware cuz if any route will get matched, it'll get executed if it's not an error middleware
-//     // next(new MyError(404, "Page Not Found"));
-//     throw new MyError(404, "Page Not Found");
-// })
+app.use((err, req, res, next)=>{ // this middleware MUST be an error middleware cuz if any route will get matched, it'll get executed if it's not an error middleware
+    // next(new MyError(404, "Page Not Found"));
+    throw new MyError(404, "Page Not Found");
+})
 
 
 app.use((err, req, res, next)=>{

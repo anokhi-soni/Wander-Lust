@@ -111,7 +111,7 @@ main()
 async function initializeData() { // we'll call this function whenever we'll have to initialize the data again
     await Listing.deleteMany({}); // to first delete all the data from the database
     await Review.deleteMany({});
-    let KiriObject = '697443156cbaf1aca1924fa7';
+    let KiriObject = '69b03658c6bae3a1008eab76';
     sampleData.data =  await Promise.all(sampleData.data.map(async (object) => {
 
         let result = await geocodingClient.forwardGeocode({

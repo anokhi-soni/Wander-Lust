@@ -30,5 +30,5 @@ module.exports.deletReview =  async (req, res)=>{ // id is the id of a listing a
     let review = await Review.findByIdAndDelete(`${reviewId}`);   
     await Listing.findByIdAndUpdate(id, {$pull : {reviews : reviewId}}); // means find document with id 'id' in Listing model/collection and then update it as => remove (ie., $pull) the entity from the array 'reviews' which matches the value 'reviewId'
     req.flash("success", "review deleted successfully");
-    res.redirect(`/listings/${id}`);
+    return res.redirect(`/listings/${id}`);
 }

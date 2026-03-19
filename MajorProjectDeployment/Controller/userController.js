@@ -15,20 +15,20 @@ module.exports.postSignUp = async(req, res)=>{
     req.login(userRegistered, (error)=>{
         if(error) return next(error);
         req.flash("success", `Welcome to WanderLust ${username}!`);
-        res.redirect("/listings");
+        return res.redirect("/listings");
     })
     
 }
 
 module.exports.loginForm = (req, res)=>{
-    res.render("listings/Login");
+    return res.render("listings/Login");
 }
 
 module.exports.postLogin = async(req, res)=>{
     req.flash("success", "Your're logged in successfully");
     console.log(res.locals.redirectUrl);
     let redirecTotUrl = res.locals.redirectUrl || "/listings"; // yaani agar res.locals.redirectUrl khaali nahi hoga to wo redirectToUrl me store ho jaayega anyatha redirectToUrl me /listings store ho jaayega
-    res.redirect(redirecTotUrl);
+    return res.redirect(redirecTotUrl);
 }
 
 module.exports.logOut = (req, res, next)=>{

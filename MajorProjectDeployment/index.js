@@ -97,6 +97,10 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", usersRouter);
 
+app.get("/", (req, res)=>{
+    return res.redirect("/listings");
+})
+
 async function main(){
     return Mongoose.connect(Atlas_DB_URL);
 }

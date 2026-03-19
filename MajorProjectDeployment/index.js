@@ -169,7 +169,7 @@ app.get("/search", async (req, res, next)=>{
     console.log(destination);
     let place = await Listing.findOne({title : `${destination}`});
     // console.log(place._id.toHexString());
-    // console.log(place._id);
+    console.log(place._id);
     place ? res.redirect(`/listings/${place._id.toHexString()}`) :  next(new MyError(404, "No Results Found"));;
     // res.send("Yo!")
 })

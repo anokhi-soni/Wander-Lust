@@ -98,7 +98,7 @@
                                     <br>
                                     <% if (userLoginInfo && review.author._id.equals(userLoginInfo._id)) { %>
                                         <form action="/listings/<%= place._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
-                                            <button type="submit">delete</button>
+                                            <button class="btn btn-outline-dark mb-4" type="submit">delete</button>
                                         </form>
                                     <% } %>
                                 </div>            

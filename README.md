@@ -160,7 +160,7 @@ The project focuses on implementing industry-standard backend concepts including
       │
       ▼
  MongoDB Database
-````
+```
 
 ---
 
@@ -225,7 +225,7 @@ WanderLust
 Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/WanderLust.git
+git clone https://github.com/anokhi-soni/Wander-Lust
 ```
 
 Move into the project directory

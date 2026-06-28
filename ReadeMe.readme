@@ -1,9 +1,0 @@
-• Init folder => contains all the sample datas which we can insert into our db at any time
-• views => Contains all the ejs files
-    i. includes => contains files that contain module of codes for small parts of the website. ex., navbar, footer, etc. which we can include into another ejs files
-    ii. layouts => It conatins files (boilerplate too) which specify the default layout of the website pages
-    iii. listings => conatins all the pages of the website.
-• models => contains schemas 
-    i. listings.js => Schema for listings
-    ii. listingSchmea => Joi Schema for server side validation
-    iii. review.js => reviews schema

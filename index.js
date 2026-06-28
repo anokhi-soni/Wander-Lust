@@ -119,19 +119,19 @@ async function initializeData() { // we'll call this function whenever we'll hav
     sampleData.data =  await Promise.all(sampleData.data.map(async (object) => {
 
         let result = await geocodingClient.forwardGeocode({
-        query: object.location, // The place which is to be converted into coordinates
-        // limit: 2 // how many results (coordinates) you want of the specified place // by default it is set to 5 if we don't set any limit
-        limit: 1
-    })
-    .send();
-    console.log(result.body.features[0].geometry);
+            query: object.location, // The place which is to be converted into coordinates
+            // limit: 2 // how many results (coordinates) you want of the specified place // by default it is set to 5 if we don't set any limit
+            limit: 1
+        })
+        .send();
+        console.log(result.body.features[0].geometry);
         return {
             ...object, 
             owner : KiriObject,
             geometry : result.body.features[0].geometry
         } 
-    })
-);
+        })
+    );
     // console.log(sampleData.data);
     await Listing.insertMany(sampleData.data); // to insert the sample data again
 

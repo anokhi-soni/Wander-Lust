@@ -1,4 +1,3 @@
-````md
 <div align="center">
 
 # 🏡 WanderLust
@@ -337,4 +336,3 @@ If you enjoyed exploring this project, please consider leaving a ⭐.
 Made with ❤️ using Node.js, Express, MongoDB & Bootstrap.
 
 </div>
-```

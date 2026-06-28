@@ -65,7 +65,7 @@ module.exports.postListing = async (req, res, next)=>{
 
 module.exports.showListing = async (req, res, next)=>{
     let {id} = req.params;
-    let place = await Listing.findById(id).populate({path: "reviews", populate : {path:"author"}}).populate("owner");
+    let place = await Listing.findById(id)?.populate({path: "reviews", populate : {path:"author"}}).populate("owner");
     if(!place) {
         // next(new MyError(405, "Page Not Found!"));
         req.flash("error", "The page you're looking for doesn't exists...");
